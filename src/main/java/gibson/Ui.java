@@ -1,55 +1,43 @@
 package gibson;
 
+import java.io.IOException;
+
+import gibson.task.Parser;
+import gibson.view.MainWindow;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
 /**
  * Ui prints strings in a specific format for the Gibson program.
  */
-public class Ui {
-    private static final String LINE = "____________________________________________________________";
-    private static final String ERROR_LINE = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
-    private static final String LOGO = " _____ ______ ____   _____  ____  _   _\n"
-            + "/ _____|_   _|  _ \\ / ____|/ __ \\| \\ | |\n"
-            + "| |  __  | | | |_) | (___ | |  | |  \\| |\n"
-            + "| | |_ | | | |  _ < \\___ \\| |  | | . ` |\n"
-            + "| |__| |_| |_| |_) |____) | |__| | |\\  |\n"
-            + "\\______|_____|____/|_____/ \\____/|_| \\_|\n";
+public class Ui extends Application {
+    private Parser parser = new Parser();
 
-    /**
-     * Prints welcome message.
-     */
-    public void printWelcome() {
-        System.out.println(LINE);
-        System.out.println(LOGO);
-        System.out.println("Hello! I'm Gibson");
-        System.out.println("What can I do for you?");
-        System.out.println(LINE);
+    @Override
+    public void start(Stage stage) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Ui.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            stage.setTitle("Gibson");
+            fxmlLoader.<MainWindow>getController().setUi(this);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
-     * Prints goodbye message.
+     * Returns response of the program from a user input
+     * Allows other classes to communicate with the parser.
+     * @param input the user input
+     * @return the response of the program from a user input
      */
-    public void printBye() {
-        System.out.println(LINE);
-        System.out.println("Bye. Hope to see you soon!");
-        System.out.println(LINE);
-    }
-
-    /**
-     * Prints message between 2 lines.
-     * @param message the String to be printed
-     */
-    public void printMessage(String message) {
-        System.out.println(LINE);
-        System.out.println(message);
-        System.out.println(LINE);
-    }
-
-    /**
-     * Prints error message between 2 lines of exclamation marks.
-     * @param message the String to be printed
-     */
-    public void printErrorMessage(String message) {
-        System.out.println(ERROR_LINE);
-        System.out.println(message);
-        System.out.println(ERROR_LINE);
+    public String getResponse(String input) {
+        return parser.processInput(input);
     }
 }
