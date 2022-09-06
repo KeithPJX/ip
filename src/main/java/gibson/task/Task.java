@@ -5,7 +5,7 @@ package gibson.task;
  */
 public class Task {
     private String taskString;
-    private boolean done;
+    private boolean isDone;
 
     /**
      * Constructs a Task object that is represented by a task string which describes the task.
@@ -16,15 +16,15 @@ public class Task {
             throw new IllegalArgumentException("Task description cannot be blank.");
         }
         this.taskString = taskString;
-        this.done = false;
+        this.isDone = false;
     }
 
     public void mark() {
-        this.done = true;
+        this.isDone = true;
     }
 
     public void unmark() {
-        this.done = false;
+        this.isDone = false;
     }
 
     public char getChar() {
@@ -53,7 +53,7 @@ public class Task {
 
     @Override
     public String toString() {
-        if (done) {
+        if (isDone) {
             return "[" + getChar() + "][X] " + taskString;
         } else {
             return "[" + getChar() + "][ ] " + taskString;
