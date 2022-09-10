@@ -2,28 +2,65 @@
 
 ## Features 
 
-### Feature-ABC
+### List tasks
 
-Description of the feature.
+Lists all the task in the task list with the 'list' command.
 
-### Feature-XYZ
+Format: `list`
 
-Description of the feature.
+### Add Todo
 
-## Usage
+Add a Todo task to the task list with the 'todo' command.
 
-### `Keyword` - Describe action
+Format: `todo [description of todo]`
 
-Describe the action and its outcome.
+Example of usage: `todo Buy milk`
 
-Example of usage: 
+### Add Event
 
-`keyword (optional arguments)`
+Add an Event task to the task list with the 'event' command.
 
-Expected outcome:
+Format: `event [description of event] /at [description of where/when the event is held at]`
 
-Description of the outcome.
+Example of usage: `event Movie screening /at Cinema`
 
-```
-expected output
-```
+### Add Deadline
+
+Add a Deadline task to the task list with the 'deadline' command.
+
+Format: `deadline [description of deadline] /by [time of deadline in format "y-M-d H:m" or "d MMM yyyy H:m]`
+
+Example of usage: `event Assignment /by 2020-1-1 23:59`
+
+### Mark a task
+
+Mark a task as done with the 'mark' command.
+
+Format: `mark [number of the task as shown in the task list]`
+
+Example of usage: `mark 1`
+
+### Unmark a task
+
+Unmark a task that was marked as done with the 'unmark' command.
+
+Format: `unmark [number of the task as shown in the task list]`
+
+Example of usage: `unmark 1`
+
+### Delete a task
+
+Delete a task from the task list with the 'delete' command.
+
+Format: `delete [number of the task as shown in the task list]`
+
+Example of usage: `delete 1`
+
+### Find a task
+
+Finds a task with the given task description with the 'find' command.
+Does not search /at of Event and /by of Deadline.
+
+Format: `find [query to match with]`
+
+Example of usage: `find Movie`
